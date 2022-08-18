@@ -1,6 +1,6 @@
 export const profile = `
   <main class="profile">
-    {{> avatar source='' }}
+    {{> avatar source=avatar }}
 
     <div class="profile__inputs">
       {{> inputProfile id="login" label="Login" type="text" action="edit" val=login  }}
