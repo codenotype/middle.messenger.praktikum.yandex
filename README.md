@@ -3,7 +3,7 @@
 This application is work in progress.
 It should be a messenger app in the nearest future!
 
-Current version is contains only basic layout.
+Current version contains only basic layout.
 
 # Requirements
 NodeJS version is equal or more than 12

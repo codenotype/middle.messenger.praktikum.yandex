@@ -1,6 +1,6 @@
 export const profilePassword = `
   <main class="profile">
-    {{> avatar source='' }}
+    {{> avatar source=avatar }}
 
     <div class="profile__inputs profile__inputs_password">
       {{> inputProfile id="oldPassword" label="Old password" type="password" val=oldPassword  action="show" }}
