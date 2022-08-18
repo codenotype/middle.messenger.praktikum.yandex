@@ -1,0 +1,63 @@
+$inpt-bg-clr: #1B2C3C;
+
+.input {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: .5rem;
+  
+  &:focus {
+    outline: none;
+  }
+
+  input {
+    background: $inpt-bg-clr;
+    border: .2rem solid $base-txt-clr;
+    border-radius: 2rem;
+    width: $width-btn-inpt-base;
+    height: $height-btn-inpt-base;
+    color: white;
+    padding: 0 2rem;
+  }
+  
+  label {
+    color: $base-txt-clr;
+    
+  }
+
+  &_profile {
+    input {
+      border: none;
+      border-radius: 0;
+      background: $bg-main;
+      padding-left: 0;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    label {
+      color: $green-clr;
+    }
+
+    svg {
+      fill: $base-txt-clr;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    border-bottom: .2rem solid $base-txt-clr;
+
+    & svg {
+      display: block;
+    }
+  }
+}
+
+
+
+  
+

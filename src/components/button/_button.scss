@@ -1,0 +1,30 @@
+$button-main-color: silver; 
+$button-danger-color: lightcoral;
+$btn-hover-clr: rgba(58, 182, 122, 1);
+$button-border: .2rem solid;
+$button-std-w: 25rem;
+$button-std-h: 5rem;
+
+.button {
+  background: rgba(0, 0, 0, 0);
+  border: $button-border $button-main-color;
+  border-radius: 2.5rem;
+  color: $button-main-color;
+  width: $button-std-w;
+  height: $button-std-h;
+
+  &_danger {
+    border: $button-border $button-danger-color;
+    color: $button-danger-color;
+  }
+
+  &:hover {
+    transition: .4s;
+    border-color: green;
+    background-color: $btn-hover-clr;
+    color: white;
+  }
+}
+
+  
+
