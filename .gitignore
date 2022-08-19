@@ -1,0 +1,9 @@
+/node_modules
+/dist
+/build
+/.parcel-cache
+/.git
+/test
+
+structure.txt
+realme.md

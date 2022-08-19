@@ -1,0 +1,70 @@
+@import './variables';
+@import './components/button/button';
+@import './components/input/input';
+@import './pages/login/login-form.scss';
+@import './pages/error/error';
+@import './pages/profile/profile';
+@import './components/avatar/avatar';
+@import './components/modal/modal';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+}
+
+html {
+  font-size: 62.5%;
+  color: $base-txt-clr;
+}
+
+body {
+  background: $bg-main;
+}
+
+#app {
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+p, a, li, button, span, label, input {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: $base-txt-clr;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 4rem;
+  color: $base-txt-clr;
+}
+
+.bigger-text {
+  font-size: 4rem;
+}
+
+.large-text {
+  font-size: 10rem;
+}
+
+#router {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  & > * {
+    padding: .2rem;
+  }
+}
+
+
