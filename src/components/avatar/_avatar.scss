@@ -1,10 +1,9 @@
 $bdr-r: 50%;
 $avatar-width: 14rem;
 $avatar-height: 14rem;
-$bdr-thin: .2rem;
+$bdr-thin: 0.2rem;
 
 .avatar {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,20 +11,25 @@ $bdr-thin: .2rem;
   width: $avatar-width;
   height: $avatar-height;
 
-  & img {
-    position: absolute;
-    border-radius: $bdr-r;
-    width: inherit;   
+  label {
+    width: inherit;
     height: inherit;
-    border: $bdr-thin solid $base-txt-clr;
+    top: 0;
+
+    img {
+      width: inherit;
+      height: inherit;
+      border-radius: $bdr-r;
+      border: $bdr-thin solid $base-txt-clr;
+    }
   }
 
   &__cover {
     opacity: 0;
     position: absolute;
-    background: rgba(0, 0, 0, 1);
-    width: $avatar-width - $bdr-thin;   
-    height: $avatar-width - $bdr-thin; 
+    background: rgba(0, 0, 0, 100%);
+    width: $avatar-width - $bdr-thin;
+    height: $avatar-width - $bdr-thin;
     border-radius: $bdr-r;
 
     display: flex;
@@ -34,15 +38,13 @@ $bdr-thin: .2rem;
 
     cursor: pointer;
 
-    & p {
+    p {
       font-size: 1.6rem;
     }
 
     &:hover {
-      transition: .2s;
+      transition: 0.2s;
       opacity: 0.8;
     }
   }
-
-  
 }

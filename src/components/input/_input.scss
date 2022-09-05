@@ -1,28 +1,27 @@
-$inpt-bg-clr: #1B2C3C;
+$inpt-bg-clr: #1b2c3c;
 
 .input {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: .5rem;
-  
+  gap: 0.5rem;
+
   &:focus {
     outline: none;
   }
 
   input {
     background: $inpt-bg-clr;
-    border: .2rem solid $base-txt-clr;
+    border: 0.2rem solid $base-txt-clr;
     border-radius: 2rem;
     width: $width-btn-inpt-base;
     height: $height-btn-inpt-base;
     color: white;
     padding: 0 2rem;
   }
-  
+
   label {
     color: $base-txt-clr;
-    
   }
 
   &_profile {
@@ -49,15 +48,38 @@ $inpt-bg-clr: #1B2C3C;
   &__wrapper {
     display: flex;
     align-items: center;
-    border-bottom: .2rem solid $base-txt-clr;
+    border-bottom: 0.2rem solid $base-txt-clr;
 
-    & svg {
+    svg {
       display: block;
+    }
+  }
+
+  &__chat-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* stylelint-disable */
+    input {
+      padding-left: 4.5rem;
+      width: 54.3rem;
+    }
+    /* stylelint-enable */
+    img {
+      position: absolute;
+      width: calc($height-btn-inpt-base - 2.5rem);
+      filter: invert(100%);
+      opacity: 0.5;
+      transform: translateX(1.5rem);
     }
   }
 }
 
+#message {
+  width: 130.5rem;
+}
 
-
-  
-
+#chat-search {
+  width: 54.5rem;
+}

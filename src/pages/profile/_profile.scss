@@ -13,13 +13,11 @@
 
     &_password {
       max-width: 44rem;
-      //gap: 4rem;
     }
   }
 
   &__buttons {
     display: flex;
-    flex-direction: column;
     gap: 5rem;
     justify-content: center;
   }

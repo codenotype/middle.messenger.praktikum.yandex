@@ -1,11 +1,16 @@
 @import './variables';
 @import './components/button/button';
 @import './components/input/input';
-@import './pages/login/login-form.scss';
+@import './pages/login/login-form';
 @import './pages/error/error';
 @import './pages/profile/profile';
 @import './components/avatar/avatar';
 @import './components/modal/modal';
+@import './components/card/card';
+@import './pages/chats/chats';
+@import './components/scrollbar/scrollbar';
+@import './components/message/messages';
+@import './components/menus/menus';
 
 * {
   margin: 0;
@@ -30,10 +35,11 @@ body {
   gap: 20px;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 }
 
 p, a, li, button, span, label, input {
-  font-family: 'Quicksand', sans-serif;
+  font-family: Quicksand, sans-serif;
   font-size: 2rem;
 }
 
@@ -43,8 +49,14 @@ a {
 }
 
 h1 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 4rem;
+  color: $base-txt-clr;
+}
+
+h2 {
+  font-family: Montserrat, sans-serif;
+  font-size: 2rem;
   color: $base-txt-clr;
 }
 
@@ -62,9 +74,11 @@ h1 {
   justify-content: center;
   gap: 1rem;
 
-  & > * {
-    padding: .2rem;
+  * {
+    padding: 0.2rem;
   }
 }
 
-
+input.hidden {
+  visibility: hidden;
+}

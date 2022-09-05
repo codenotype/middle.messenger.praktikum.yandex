@@ -1,0 +1,21 @@
+{ 
+  "extends": ["stylelint-config-standard-scss"],
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "color-function-notation": "legacy",
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "scss/selector-no-redundant-nesting-selector": true,
+    "scss/dollar-variable-empty-line-before": "never",
+    "string-quotes": "single",
+    "selector-list-comma-newline-before": "never-multi-line",
+    "selector-list-comma-newline-after": "never-multi-line",
+    "declaration-empty-line-before": ["always", {
+      "except": ["first-nested"],
+      "ignore": ["after-comment", "after-declaration"]
+    }],
+    "declaration-colon-newline-after": "always-multi-line"
+  }
+}
