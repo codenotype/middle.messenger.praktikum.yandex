@@ -1,5 +1,4 @@
-.menu {
-  // parent should be relative!
+.menu { // parent should be relative!
   position: absolute;
   visibility: visible;
   width: max-content;
@@ -47,6 +46,4 @@
   }
 }
 
-.rotated-90 {
-  transform: rotate(45deg);
-}
+.rotated-90 { transform: rotate(45deg); }

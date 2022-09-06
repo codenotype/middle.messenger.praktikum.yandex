@@ -5,9 +5,7 @@
     position: relative;
     width: 50%;
 
-    &_own {
-      align-self: flex-end;
-    }
+    &_own { align-self: flex-end; }
 
     &__title {
       display: flex;
@@ -15,9 +13,7 @@
       align-items: center;
       margin-bottom: 0.5rem;
 
-      p {
-        color: wheat;
-      }
+      p { color: wheat; }
 
       img {
         width: 32;
@@ -46,8 +42,6 @@
       }
     }
 
-    &__text {
-      font-size: 2rem;
-    }
+    &__text { font-size: 2rem; }
   }
 }

@@ -22,9 +22,7 @@
     }
   }
 
-  &__title {
-    color: $green-clr;
-  }
+  &__title { color: $green-clr; }
 
   &__left-panel {
     padding: 1rem;
@@ -45,9 +43,7 @@
     flex-direction: column;
     gap: 1rem;
 
-    > *:first-child {
-      border: none;
-    }
+    > *:first-child { border: none; }
   }
 
   &__chat {
