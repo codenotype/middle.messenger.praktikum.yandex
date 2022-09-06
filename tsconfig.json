@@ -6,8 +6,6 @@
     "strict": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-
-    // yacheckin
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
