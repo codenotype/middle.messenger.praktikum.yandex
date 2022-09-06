@@ -2,19 +2,14 @@
   // parent should be relative!
   position: absolute;
   visibility: visible;
-
   width: max-content;
-
   border: 0.2rem solid silver;
   border-radius: 1rem;
   background: #1c2c3c;
-
   padding: 1rem;
-
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
   transition: 0.2s;
   opacity: 1;
 

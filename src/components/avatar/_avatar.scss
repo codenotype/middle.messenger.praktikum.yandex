@@ -7,7 +7,6 @@ $bdr-thin: 0.2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: $avatar-width;
   height: $avatar-height;
 
@@ -31,11 +30,9 @@ $bdr-thin: 0.2rem;
     width: $avatar-width - $bdr-thin;
     height: $avatar-width - $bdr-thin;
     border-radius: $bdr-r;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     cursor: pointer;
 
     p {

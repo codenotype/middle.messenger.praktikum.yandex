@@ -1,11 +1,8 @@
 .card {
   position: relative;
-
   transition: 0.2s;
-
   padding: 1rem;
   margin-right: 1rem;
-
   display: grid;
   min-width: 50rem;
   min-height: 12rem;
@@ -24,10 +21,8 @@
 
   &__image {
     grid-area: picture;
-
     width: 10rem;
     height: 10rem;
-
     border-radius: 50%;
     border: 0.2rem solid $base-txt-clr;
     overflow: hidden;
@@ -47,7 +42,6 @@
 
   &__message {
     grid-area: message;
-
     font-size: 1.6rem;
   }
 
@@ -63,9 +57,7 @@
     position: absolute;
     right: 1rem;
     top: 1rem;
-
     font-size: 1.2rem;
-
     color: silver;
   }
 
@@ -73,14 +65,11 @@
     position: absolute;
     right: 1rem;
     bottom: 0;
-
     width: 2.5rem;
     height: 2.5rem;
-
     border: 2px solid $green-clr;
     border-radius: 50%;
     color: white;
-
     display: flex;
 
     p {
