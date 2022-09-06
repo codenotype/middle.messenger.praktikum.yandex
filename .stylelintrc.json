@@ -14,5 +14,8 @@
     "block-closing-brace-space-before": "always-single-line",
     "block-opening-brace-space-after": "always-single-line",
     "block-opening-brace-space-before": "always-single-line"
-  }
+  },
+  "ignoreFiles": [
+    "dist/*"
+  ]
 }
