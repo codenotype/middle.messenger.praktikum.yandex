@@ -1,0 +1,10 @@
+/node_modules
+/dist
+/build
+/.parcel-cache
+/.git
+
+**/*.min.js
+
+structure.txt
+other.txt

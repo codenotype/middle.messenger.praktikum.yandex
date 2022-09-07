@@ -1,0 +1,21 @@
+{ 
+  "extends": ["stylelint-config-standard-scss"],
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "color-function-notation": "legacy",
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "scss/selector-no-redundant-nesting-selector": true,
+    "scss/dollar-variable-empty-line-before": "never",
+    "string-quotes": "single",
+    "block-closing-brace-newline-after": "always-multi-line",
+    "block-closing-brace-space-before": "always-single-line",
+    "block-opening-brace-space-after": "always-single-line",
+    "block-opening-brace-space-before": "always-single-line"
+  },
+  "ignoreFiles": [
+    "dist/*"
+  ]
+}

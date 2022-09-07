@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  border: .2rem solid silver;
+  border: 0.2rem solid silver;
   border-radius: 2.5rem;
   width: 50rem;
   height: 50rem;
@@ -13,15 +13,12 @@
     justify-content: center;
     flex-direction: column;
 
-    & label {
+    label {
       width: 100%;
       text-align: center;
       text-decoration: underline;
     }
-  
-    & input {
-      visibility: hidden;
-      height: 0px;
-    }
+
+    input { visibility: hidden; }
   }
 }

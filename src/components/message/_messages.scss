@@ -1,0 +1,47 @@
+.message {
+  background: #000;
+
+  &-chat {
+    position: relative;
+    width: 50%;
+
+    &_own { align-self: flex-end; }
+
+    &__title {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
+
+      p { color: wheat; }
+
+      img {
+        width: 32;
+        height: 32;
+        border-radius: 50%;
+        border: 0.2rem solid silver;
+      }
+    }
+
+    &__time {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: 1.2rem;
+    }
+
+    &__content {
+      background: rgba($color: #16384a, $alpha: 100%);
+      border: 1px solid white;
+      border-radius: 1rem;
+      padding: 1rem;
+
+      &_own {
+        background: rgba($color: #255a77, $alpha: 100%);
+        align-self: center;
+      }
+    }
+
+    &__text { font-size: 2rem; }
+  }
+}

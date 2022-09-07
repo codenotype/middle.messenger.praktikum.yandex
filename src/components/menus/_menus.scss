@@ -1,0 +1,49 @@
+.menu { // parent should be relative!
+  position: absolute;
+  visibility: visible;
+  width: max-content;
+  border: 0.2rem solid silver;
+  border-radius: 1rem;
+  background: #1c2c3c;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  transition: 0.2s;
+  opacity: 1;
+
+  &_options {
+    right: 4rem;
+    top: 1rem;
+  }
+
+  &_attach {
+    bottom: 7rem;
+    left: 1rem;
+  }
+
+  &_hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &__option {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.6rem;
+
+    img {
+      width: 20;
+      filter: invert(75%);
+    }
+
+    &:hover {
+      transition: 0.2s;
+      color: $green-clr;
+    }
+  }
+}
+
+.rotated-90 { transform: rotate(45deg); }
