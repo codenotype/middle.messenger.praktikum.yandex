@@ -33,7 +33,6 @@ abstract class Block<Props extends {} = any> {
     eventBus.emit(Block.events.init);
   }
 
-  // 1.1   =============================================
   private _getChildrenAndProps(childrenAndProps: Props) {
     const initial = {
       children: {} as Record<string, Block | Block[]>,
@@ -49,7 +48,6 @@ abstract class Block<Props extends {} = any> {
     }, initial);
   }
 
-  // 1.2  =============================================
   private _makePropsProxy(props: any) {
     /* eslint-disable */
     const block = this;
@@ -71,7 +69,6 @@ abstract class Block<Props extends {} = any> {
     });
   }
 
-  // 1.3   =============================================
   private _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.events.init, this._init.bind(this));
     eventBus.on(Block.events.mount, this._componentDidMount.bind(this));
@@ -79,18 +76,15 @@ abstract class Block<Props extends {} = any> {
     eventBus.on(Block.events.render, this._render.bind(this));
   }
 
-  // 1.4   =============================================
   private _init() {
     this.init();
 
     this.eventBus().emit(Block.events.render);
   }
 
-  // 2.1 (после вызова конструкторов) ==================
   /* eslint-disable */
   protected init() {}
 
-  // 2.2   =============================================
   private _render() {
     const fragment = this.render();
 
@@ -103,7 +97,6 @@ abstract class Block<Props extends {} = any> {
     this._addEvents();
   }
 
-  // 2.3   =============================================
   protected swap(template: (context: any) => string, context: any) {
     const contextAndStubs = { ...context };
 
@@ -142,7 +135,6 @@ abstract class Block<Props extends {} = any> {
     return temp.content;
   }
 
-  // 2.4   =============================================
   private _addEvents() {
     const { events = {} } = this.props as Props & { events: Events };
 
@@ -151,12 +143,10 @@ abstract class Block<Props extends {} = any> {
     });
   }
 
-  // 2.5   =============================================
   public getContent() {
     return this.element;
   }
 
-  // 2.6   =============================================
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.events.mount);
 
@@ -167,12 +157,10 @@ abstract class Block<Props extends {} = any> {
     );
   }
 
-  // 2.7   =============================================
   private _componentDidMount() {
     this.componentDidMount();
   }
 
-  // 2.8   =============================================
   /* eslint-disable */
   public componentDidMount() {}
 
