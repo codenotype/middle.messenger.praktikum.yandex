@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "---",
   "scripts": {
-    "dev": "parcel src/index.html",
-    "build": "parcel build src/index.html",
-    "start": "npm i && npm run build && node src/server.js"
+    "dev": "parcel src/index.html --no-cache",
+    "build": "parcel build src/index.html --no-cache",
+    "start": "npm i && npm run build && node src/server.js",
+    "test": "./node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",

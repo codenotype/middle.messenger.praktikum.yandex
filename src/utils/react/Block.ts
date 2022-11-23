@@ -1,9 +1,8 @@
 import { EventBus } from './EventBus';
 import { nanoid } from 'nanoid';
-import { Events, Props } from './types';
+import { Events } from './types';
 
-// Нельзя создавать экземпляр данного класса
-class Block {
+abstract class Block<Props extends {} = any> {
   static events = {
     init: 'init',
     mount: 'mount',
@@ -12,14 +11,14 @@ class Block {
   };
 
   public id = nanoid(5);
-  public children: Record<string, Block>;
+  public children: Record<string, Block | Block[]>;
 
-  protected props: any;
+  protected props: Props;
 
   private eventBus: () => EventBus;
   private _element: HTMLElement | null = null;
 
-  constructor(propsWithChildren: any = {}) {
+  constructor(propsWithChildren: Props) {
     const eventBus = new EventBus();
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren);
@@ -35,10 +34,10 @@ class Block {
   }
 
   // 1.1   =============================================
-  private _getChildrenAndProps(childrenAndProps: any) {
+  private _getChildrenAndProps(childrenAndProps: Props) {
     const initial = {
-      children: {} as Props<Block>,
-      props: {} as Props,
+      children: {} as Record<string, Block | Block[]>,
+      props: {} as Record<string, any>,
     };
 
     return Object.entries(childrenAndProps).reduce((prev, [key, value]) => {
@@ -109,7 +108,11 @@ class Block {
     const contextAndStubs = { ...context };
 
     Object.entries(this.children).forEach(([name, component]) => {
-      contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+      const createStub = (id: string) => `<div data-id="${id}"></div>`;
+
+      contextAndStubs[name] = Array.isArray(component)
+        ? component.map(({ id }) => createStub(id))
+        : createStub(component.id);
     });
 
     const html = template(contextAndStubs);
@@ -118,8 +121,7 @@ class Block {
 
     temp.innerHTML = html;
 
-    Object.entries(this.children).forEach((entry) => {
-      const component = entry[1]
+    const replaceStub = (component: Block) => {
       const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
 
       if (!stub) {
@@ -129,6 +131,12 @@ class Block {
       component.getContent()?.append(...Array.from(stub.childNodes));
 
       stub.replaceWith(component.getContent()!);
+    };
+
+    Object.values(this.children).forEach((component) => {
+      Array.isArray(component)
+        ? component.map((component) => replaceStub(component))
+        : replaceStub(component);
     });
 
     return temp.content;
@@ -136,7 +144,7 @@ class Block {
 
   // 2.4   =============================================
   private _addEvents() {
-    const { events = {} } = this.props as { events: Events };
+    const { events = {} } = this.props as Props & { events: Events };
 
     Object.keys(events).forEach((eventName) => {
       this._element?.addEventListener(eventName, events[eventName]);
@@ -153,7 +161,9 @@ class Block {
     this.eventBus().emit(Block.events.mount);
 
     Object.values(this.children).forEach((child) =>
-      child.dispatchComponentDidMount()
+      Array.isArray(child)
+        ? child.forEach((component) => component.dispatchComponentDidMount())
+        : child.dispatchComponentDidMount()
     );
   }
 
@@ -173,7 +183,7 @@ class Block {
   }
 
   private _removeEvents() {
-    const { events = {} } = this.props as { events: Events };
+    const { events = {} } = this.props as Props & { events: Events };
 
     Object.keys(events).forEach((eventName) => {
       this._element?.removeEventListener(eventName, events[eventName]);

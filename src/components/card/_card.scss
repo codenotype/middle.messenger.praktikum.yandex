@@ -4,7 +4,7 @@
   padding: 1rem;
   margin-right: 1rem;
   display: grid;
-  min-width: 50rem;
+  min-width: 30rem;
   min-height: 12rem;
 
   grid-template: {
@@ -59,10 +59,30 @@
     color: silver;
   }
 
-  &__notification {
+  &__delete {
     position: absolute;
     right: 1rem;
-    bottom: 0;
+    bottom: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: rgba(0,0,0,0);
+    border: 0.2rem solid lightcoral;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & p {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+  }
+
+  &__notification {
+    position: absolute;
+    right: 4rem;
+    bottom: 1rem;
     width: 2.5rem;
     height: 2.5rem;
     border: 2px solid $green-clr;

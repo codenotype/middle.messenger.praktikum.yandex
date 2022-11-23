@@ -54,16 +54,16 @@ export default class Validator {
 
   validate(inputType: string, value: string) {
     switch (inputType) {
-    case 'login':
-      return this.checkLogin(value);
-    case 'password':
-      return this.checkPassword(value);
-    case 'email':
-      return this.checkEmail(value);
-    case 'phone':
-      return this.checkPhone(value);
-    default:
-      return this.checkMessage(value);
+      case 'login':
+        return this.checkLogin(value);
+      case 'password':
+        return this.checkPassword(value);
+      case 'email':
+        return this.checkEmail(value);
+      case 'phone':
+        return this.checkPhone(value);
+      default:
+        return this.checkMessage(value);
     }
   }
 }

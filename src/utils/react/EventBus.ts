@@ -13,7 +13,7 @@ export class EventBus {
 
   off(event: string, callback: Callback) {
     if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+      throw Error(`No event to off, name: ${event}`);
     }
 
     this.listeners[event] = this.listeners[event].filter(
@@ -23,7 +23,9 @@ export class EventBus {
 
   emit(event: string, ...args: any) {
     if (!this.listeners[event]) {
-      throw new Event(`Нет события: ${event}`);
+      console.warn(`No event to emit, name: ${event}`);
+
+      return;
     }
 
     this.listeners[event].forEach((listener) => {

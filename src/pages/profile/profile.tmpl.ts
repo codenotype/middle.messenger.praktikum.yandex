@@ -10,10 +10,12 @@ export const profile = `
       {{{ InputChatName }}}
     </div>
     <div class="profile__buttons">
+      {{{ ButtonChats }}}
       {{{ ButtonEdit }}}
       {{{ ButtonPassword }}}
       {{{ ButtonLogOut }}}
     </div>
+    {{{ ModalLoad }}}
   </form>
 `;
 
@@ -27,6 +29,7 @@ export const changePassword = `
     </div>
 
     <div class="profile__buttons">
+      {{{ ButtonBack }}}
       {{{ ButtonSavePassword }}}
     </div>
   </form>

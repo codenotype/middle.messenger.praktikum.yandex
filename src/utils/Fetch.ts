@@ -5,17 +5,25 @@ const METHODS = {
   PUT: 'PUT',
   POST: 'POST',
   DELETE: 'DELETE',
+  PATCH: 'PATCH',
 } as const;
 
-type Options = {
-  data?: string[];
+type Options = Partial<{
+  data: any;
   headers: Record<string, string>;
   timeout: number;
-  method?: any;
-};
+  method: any;
+}>;
 
-export class Fetch {
-  get(url: string, options: Options) {
+export default class Fetch {
+  static api = 'https://ya-praktikum.tech/api/v2';
+  protected endpoint: string;
+
+  constructor(endpoint: string) {
+    this.endpoint = Fetch.api + endpoint;
+  }
+
+  get<Response>(url = '/', options: Options = {}): Promise<Response> {
     let params = '';
 
     if (options?.data) {
@@ -25,37 +33,55 @@ export class Fetch {
     const result = url + params;
 
     return this.request(
-      result,
+      this.endpoint + result,
       { ...options, method: METHODS.GET },
       options.timeout
     );
   }
 
-  put(url: string, options: Options) {
+  put<Response = void>(path: string, options: Options = {}): Promise<Response> {
     return this.request(
-      url,
+      this.endpoint + path,
       { ...options, method: METHODS.PUT },
       options.timeout
     );
   }
 
-  post(url: string, options: Options) {
+  post<Response = void>(
+    path: string,
+    options: Options = {}
+  ): Promise<Response> {
     return this.request(
-      url,
+      this.endpoint + path,
       { ...options, method: METHODS.POST },
       options.timeout
     );
   }
 
-  del(url: string, options: Options) {
+  patch<Response = void>(
+    path: string,
+    options: Options = {}
+  ): Promise<Response> {
     return this.request(
-      url,
+      this.endpoint + path,
+      { ...options, method: METHODS.PATCH },
+      options.timeout
+    );
+  }
+
+  del<Response>(path: string, options: Options = {}): Promise<Response> {
+    return this.request(
+      this.endpoint + path,
       { ...options, method: METHODS.DELETE },
       options.timeout
     );
   }
 
-  request = (url: string, options: Options, timeout = 5000) => {
+  private request<Response>(
+    url: string,
+    options: Options,
+    timeout = 5000
+  ): Promise<Response> {
     return new Promise((resolve, reject) => {
       const { data, headers = {}, method } = options;
       const xhr = new XMLHttpRequest();
@@ -63,17 +89,26 @@ export class Fetch {
 
       xhr.open(method, url);
 
-      xhr.onload = () => resolve(xhr);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          xhr.status < 400 ? resolve(xhr.response) : reject(xhr.response);
+        }
+      };
 
       xhr.timeout = timeout;
 
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.ontimeout = reject;
+      xhr.onabort = () => reject({ reason: 'abort' });
+      xhr.onerror = () => reject({ reason: 'network problem' });
+      xhr.ontimeout = () => reject({ reason: 'timeout' });
 
       if (titles.length > 0) {
         titles.forEach(([type, value]) => xhr.setRequestHeader(type, value));
+      } else {
+        xhr.setRequestHeader('Content-Type', 'application/json');
       }
+
+      xhr.withCredentials = true;
+      xhr.responseType = 'json';
 
       if (!data || method === METHODS.GET) {
         xhr.send();
@@ -81,5 +116,5 @@ export class Fetch {
         xhr.send(JSON.stringify(data));
       }
     });
-  };
+  }
 }

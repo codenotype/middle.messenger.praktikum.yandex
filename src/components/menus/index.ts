@@ -2,11 +2,13 @@ import Handlebars from 'handlebars';
 import { menu } from './menu.tmpl';
 import Block from '../../utils/react/Block';
 import { option } from './menu.tmpl';
+import { Events } from '../../utils/react/types';
 
 interface OptionProps {
   icon: any;
   label: string;
   rotated: string;
+  events?: Events;
 }
 
 interface MenuProps {

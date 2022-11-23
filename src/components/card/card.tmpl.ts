@@ -1,6 +1,9 @@
 const cardChat = `
-  <div class="card">
-
+  <div 
+    class="card" 
+    id={{ id }} 
+    {{#if selected}} style="background-color: rgba(0, 0, 0, 0.3)" {{/if}}
+  >
     <div class="card__image">
       <img src={{ src }} alt="chat-icon">
     </div>
@@ -13,14 +16,15 @@ const cardChat = `
       {{ lastMessage }}
     </p>
 
-    <p class="card__time">{{ time }}</p>
+    <p class="card__time"><time>{{ time }}</time></p>
 
     <div class="card__notification">
-      <p>{{ notifiationsNumber }}</p>
+      <p>{{ notifications }}</p>
     </div>
+    {{{ ButtonCardDelete }}}
   </div>
 `;
 
 export const cards = {
-  cardChat,
+  cardChat
 };

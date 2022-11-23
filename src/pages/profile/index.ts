@@ -1,55 +1,92 @@
 import { changePassword, profile } from './profile.tmpl';
-import { renderPage } from '../../utils/render';
 import Block from '../../utils/react/Block';
 import { changePasswordData, profileData } from './data';
 import Handlebars from 'handlebars';
 import { Events } from '../../utils/react/types';
 import { collect } from '../../utils/collect';
 import { validateInput } from '../../utils/validate';
+import UserController from '../../controllers/UserController';
+import { UserPasswords, UserProfile } from '../../api/types';
+import router from '../../utils/router/Router';
+import { routes } from '../../utils/router/types';
+import AuthController from '../../controllers/AuthController';
 
 interface ProfilePageProps {
-  template: string;
-  data: any;
-  events?: Events;
+  events: Events;
+  block: Record<string, Block<any>>;
 }
 
-export class ProfilePage extends Block {
+const profileEvents = {
+  submit: (event: SubmitEvent) => {
+    event.preventDefault();
+
+    const { isValid, data } = collect(event);
+
+    if (isValid) {
+      UserController.saveData(data as unknown as UserProfile).then(() => {
+        if (confirm('Данные сохранены. Перейти в чат?')) {
+          router.go(routes.chats);
+        }
+      });
+    }
+  },
+  focusin: validateInput,
+  focusout: validateInput,
+  input: validateInput,
+};
+
+export class ProfilePage extends Block<ProfilePageProps> {
   constructor(props: ProfilePageProps) {
-    super(props);
+    super({
+      ...props,
+      events: profileEvents,
+      block: profileData,
+    });
+
+    AuthController.getUser();
   }
 
   init() {
-    this.children = this.props.data;
+    this.children = this.props.block;
   }
 
   protected render(): DocumentFragment {
-    return this.swap(Handlebars.compile(this.props.template), this.props);
+    return this.swap(Handlebars.compile(profile), this.props);
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  const events = {
-    submit: collect,
-    focusin: validateInput,
-    focusout: validateInput,
-    input: validateInput,
-  };
+export class ProfilePagePasswordChange extends Block<ProfilePageProps> {
+  constructor(props: ProfilePageProps) {
+    super({
+      ...props,
+      ...{
+        template: changePassword,
+        data: changePasswordData,
+        events: {
+          submit: (event: SubmitEvent) => {
+            event.preventDefault();
 
-  renderPage(
-    '#btn-profile',
-    new ProfilePage({
-      template: profile,
-      data: profileData,
-      events,
-    })
-  );
+            const { isValid, data } = collect(event);
 
-  renderPage(
-    '#btn-profile-change',
-    new ProfilePage({
-      template: changePassword,
-      data: changePasswordData,
-      events,
-    })
-  );
-});
+            if (isValid) {
+              UserController.savePassword(
+                data as unknown as UserPasswords
+              ).then(() => router.go(routes.profile));
+            }
+          },
+          focusin: validateInput,
+          focusout: validateInput,
+          input: validateInput,
+        },
+      },
+    });
+  }
+
+  init() {
+    this.children = changePasswordData;
+  }
+
+  protected render(): DocumentFragment {
+    return this.swap(Handlebars.compile(changePassword), this.props);
+  }
+}

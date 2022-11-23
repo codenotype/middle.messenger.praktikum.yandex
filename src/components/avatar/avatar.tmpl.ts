@@ -3,8 +3,10 @@ export const avatar = `
     <label for="avatar">
       <img src={{ source }} alt="avatar">
     </label>
-    <input class="hidden" type="file" 
-      {{#if id}} name="{{ id }}" id="{{ id }}" {{/if}} 
-    />
   </div>
 `;
+
+// если понадобится восстановить загрузку
+//<input class="hidden" type="file" 
+  //{{#if id}} name="{{ id }}" id="{{ id }}" {{/if}} 
+///>

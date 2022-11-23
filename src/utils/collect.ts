@@ -6,14 +6,15 @@ export const collect = (event: SubmitEvent) => {
   const val = new Validator();
   const target = event.target as HTMLFormElement;
   const formDataArray = [...new FormData(target).entries()];
-  const isValid = formDataArray.every(([input, value]) => {
+  let isValid = formDataArray.every(([input, value]) => {
     return val.validate(input, value as string);
   });
 
-  // валидация отключена для сбора любых данных
-  formDataArray.forEach((item) => {
-    console.log(item);
-  });
+  const data = Object.fromEntries(formDataArray);
 
-  return isValid;
+  if ('password_again' in data && data?.password_again !== data?.password) {
+    isValid = false;
+  }
+
+  return { isValid, data };
 };

@@ -9,7 +9,7 @@ Handlebars.registerPartial('buttonDanger', buttonDanger);
 interface ButtonProps {
   label: string;
   type?: string;
-  events?: Events;
+  events: Events;
 }
 
 export class Button extends Block {
