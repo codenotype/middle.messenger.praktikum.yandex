@@ -7,6 +7,7 @@ import { ProfilePage, ProfilePagePasswordChange } from './pages/profile';
 import router from './utils/router/Router';
 import { routes } from './utils/router/types';
 
+// for deploy
 window.addEventListener('DOMContentLoaded', () => {
   router
     .use(routes.index, AuthForm)
