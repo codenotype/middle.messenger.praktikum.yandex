@@ -13,19 +13,28 @@ export class UserController {
   }
 
   async getUser() {
-    let { user } = store.getState();
+    try {
+      let { user } = store.getState();
 
-    if (!user) {
-      user = await AuthController.getUser();
+      if (!user) {
+        user = await AuthController.getUser();
+      }
+
+      store.set('user', user);
+
+      return user;
+    } catch (err) {
+      console.error(err)
+      return 
     }
-
-    store.set('user', user);
-
-    return user;
   }
 
   async saveData(data: UserProfile) {
-    return this.api.changeProfile(data);
+    try {
+      await this.api.changeProfile(data);
+    } catch (err) {
+      console.error('Failed to save data', err)
+    }
   }
 
   async saveAvatar() {
@@ -39,11 +48,21 @@ export class UserController {
   }
 
   async savePassword(data: UserPasswords) {
-    return this.api.changePassword(data);
+    try {
+      await this.api.changePassword(data);
+    } catch (err) {
+      console.error('Failed to save password', err)
+    }
   }
 
   async searchUser(login: string) {
-    return this.api.getUserByLogin(login);
+    try {
+      return this.api.getUserByLogin(login);
+    } catch (err) {
+      console.error('Unable to search for user', err)
+
+      return []
+    }
   }
 }
 

@@ -12,11 +12,6 @@ export class ResourcesApi extends BaseApi {
   download(path: string) {
     return this.http.get(`${path}`);
   }
-
-  create = undefined;
-  read = undefined;
-  update = undefined;
-  delete = undefined;
 }
 
 export default new ResourcesApi();

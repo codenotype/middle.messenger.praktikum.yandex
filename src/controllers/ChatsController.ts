@@ -1,4 +1,6 @@
 import chatsApi, { ChatsApi } from '../api/ChatApi';
+import router from '../utils/router/Router';
+import { routes } from '../utils/router/types';
 import store from '../utils/store/Store';
 import { Store } from '../utils/store/types';
 import MessagesController from './MessagesController';
@@ -11,41 +13,63 @@ export class ChatsController {
   }
 
   async getChats(updateStore: boolean = true) {
-    const chats = await this.api.read();
+    try {
+      const chats = await this.api.read();
 
-    if (updateStore) {
-      store.set('chats', chats);
+      if (updateStore) {
+        store.set('chats', chats);
+      }
+
+      return chats;
+    } catch (err) {
+      console.log(err)
+
+      return []
     }
-
-    return chats;
   }
 
   async createChat(title: string) {
-    await this.api.create(title);
-    await this.getChats();
+    try {
+      await this.api.create(title);
+      await this.getChats();
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   async deleteChat(id: number) {
-    await this.api.deleteChat(id);
-    await this.getChats();
+    try {
+      await this.api.deleteChat(id);
+      await this.getChats();
+    } catch (err) {
+        console.log(err)
+    }
   }
 
   getChatUsers(id: number) {
-    return this.api.getChatUsers(id);
+    try {
+      return this.api.getChatUsers(id);
+    } catch (err) {
+      return []
+    }
   }
 
   async selectChat(id: number) {
-    const { selectedChat } = store.getState();
+    try {
+      const { selectedChat } = store.getState();
 
-    if (id === selectedChat) {
-      return;
+      if (id === selectedChat) {
+        return;
+      }
+
+      const token = await this.getToken(id);
+
+      store.set('selectedChat', id);
+
+      MessagesController.connect(id, token);
+    } catch {
+      router.go(routes.notFound)
     }
-
-    const token = await this.getToken(id);
-
-    store.set('selectedChat', id);
-
-    MessagesController.connect(id, token);
   }
 
   filterChatsByTitle(title: string) {
@@ -53,21 +77,35 @@ export class ChatsController {
   }
 
   async addUser(users: number[]) {
-    const state = store.getState() as Store;
+    try {
+      const state = store.getState() as Store;
 
-    await this.api.addUser(users, state.selectedChat);
+      await this.api.addUser(users, state.selectedChat);
+    } catch (err) {
+      console.error('Unable to add user', err)
+    }
   }
 
   async deleteUser(users: number[]) {
-    const state = store.getState() as Store;
+    try {
+      const state = store.getState() as Store;
 
-    await this.api.deleteUser(users, state.selectedChat);
+      await this.api.deleteUser(users, state.selectedChat);
+    } catch (err) {
+      console.error('Unable to delete user', err)
+    }
   }
 
   async getToken(chatId: number) {
-    const { token } = await this.api.getToken(chatId);
+    try {
+      const { token } = await this.api.getToken(chatId);
 
-    return token;
+      return token;
+    } catch (err) {
+      console.error('No token was given')
+
+      return ''
+    }
   }
 }
 

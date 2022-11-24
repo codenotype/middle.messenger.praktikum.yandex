@@ -32,9 +32,15 @@ export class AuthController {
   }
 
   async getUser() {
-    const user = await this.api.read();
+    try {
+      const user = await this.api.read();
 
-    store.set('user', user);
+      store.set('user', user);
+
+      return user
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   async logout() {

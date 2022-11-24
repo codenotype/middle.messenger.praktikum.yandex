@@ -59,11 +59,6 @@ export class ChatsApi extends BaseApi {
   getToken(chatId: number): Promise<{ token: string }> {
     return this.http.post(`/token/${chatId}`);
   }
-
-  //create = undefined
-  //read = undefined
-  update = undefined;
-  delete = undefined;
 }
 
 export default new ChatsApi();

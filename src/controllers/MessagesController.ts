@@ -29,7 +29,11 @@ export class MessagesController {
 
     this._sockets[chatId] = ws;
 
-    await ws.open();
+    try {
+      await ws.open();
+    } catch {
+      throw new Error('Failed to open websocket')
+    }
 
     ws.on(wsEvents.message, (msg) => {
       const message = JSON.parse(msg);

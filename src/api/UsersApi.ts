@@ -28,11 +28,6 @@ export class UsersApi extends BaseApi {
   async getUserByLogin(login: string) {
     return this.http.post('/search', { data: { login } }) as Promise<User[]>;
   }
-
-  create = undefined;
-  read = undefined;
-  update = undefined;
-  delete = undefined;
 }
 
 export default new UsersApi();

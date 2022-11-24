@@ -27,7 +27,7 @@ const profileEvents = {
         if (confirm('Данные сохранены. Перейти в чат?')) {
           router.go(routes.chats);
         }
-      });
+      }).catch(() => alert('Unable to save data'));
     }
   },
   focusin: validateInput,

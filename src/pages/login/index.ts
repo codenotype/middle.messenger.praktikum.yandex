@@ -39,7 +39,11 @@ export class AuthForm extends Block<FormProps> {
   constructor(props: FormProps) {
     super({ ...props, events, formTitle: 'Enter' });
 
-    AuthController.getUser().then(() => router.go(routes.chats));
+    AuthController.getUser().then((user) => {
+      if (user) {
+        router.go(routes.chats)
+      }
+    })
   }
 
   protected init(): void {
