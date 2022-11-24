@@ -16,7 +16,7 @@ type Options = Partial<{
 }>;
 
 export default class Fetch {
-  static api = 'https://ya-praktikum.tech/api/v2';
+  static api = process.env.API;
   protected endpoint: string;
 
   constructor(endpoint: string) {
