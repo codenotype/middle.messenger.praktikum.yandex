@@ -13,9 +13,9 @@
     areas: 'picture title' 'picture message';
   }
 
-  &:hover { background: rgba(0, 0, 0, 20%); }
+  &:hover { background: $weak-black; }
 
-  border-top: 2px solid rgba(250, 250, 250, 10%);
+  border-top: 2px solid $weak-white;
 
   &__image {
     grid-area: picture;
@@ -47,7 +47,7 @@
     font-size: 1.6rem;
     font-weight: 600;
     letter-spacing: 0.1rem;
-    color: white;
+    color: $msg-brdr;
     opacity: 0.9;
   }
 
@@ -56,7 +56,7 @@
     right: 1rem;
     top: 1rem;
     font-size: 1.2rem;
-    color: silver;
+    color: $weaker-white;
   }
 
   &__delete {
@@ -65,10 +65,10 @@
     bottom: 1rem;
     width: 2.5rem;
     height: 2.5rem;
-    background-color: rgba(0,0,0,0);
-    border: 0.2rem solid lightcoral;
+    background-color: $black-clr;
+    border: 0.2rem solid $pink-bright-clr;
     border-radius: 50%;
-    color: white;
+    color: $msg-brdr;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,7 +87,7 @@
     height: 2.5rem;
     border: 2px solid $green-clr;
     border-radius: 50%;
-    color: white;
+    color: $msg-brdr;
     display: flex;
 
     p {

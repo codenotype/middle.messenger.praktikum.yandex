@@ -6,9 +6,6 @@ export class ChatsApi extends BaseApi {
     super('/chats');
   }
 
-  /**
-   * Get chats
-   */
   read(): Promise<Chat[]> {
     return this.http.get('/');
   }

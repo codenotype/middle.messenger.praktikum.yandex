@@ -108,7 +108,7 @@ export const profileData: Record<string, Block> = {
         const input = (e.target as any)?.querySelector('input');
 
         if (input?.files?.length > 0) {
-          UserController.saveAvatar()
+          UserController.saveAvatar();
         }
       },
     },

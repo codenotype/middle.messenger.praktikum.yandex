@@ -9,8 +9,8 @@ export const wsEvents = {
 
 export default class WS extends EventBus {
   ws: WebSocket | null = null;
-  url: string = '';
-  interval: number = 0;
+  url = '';
+  interval = 0;
 
   constructor(url: string) {
     super();
@@ -42,7 +42,7 @@ export default class WS extends EventBus {
 
     this.interval = setInterval(() => {
       this.send({ type: 'ping' });
-    }, 5000);
+    }, 5000) as any;
 
     this.on(wsEvents.open, () => true);
     this.on(wsEvents.close, () => {

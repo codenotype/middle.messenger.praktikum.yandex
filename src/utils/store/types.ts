@@ -9,4 +9,6 @@ export type State = {
   selectedChatMessagesId: string;
   messages: SocketMessage[];
 };
+
+/* eslint-disable */
 export type Store = {} & State;

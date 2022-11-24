@@ -22,7 +22,7 @@ export class ButtonCardDelete extends Block {
   }
 
   protected render(): DocumentFragment {
-    const template = `<div class="card__delete"><p>X</p></div>`;
+    const template = '<div class="card__delete"><p>X</p></div>';
 
     return this.swap(Handlebars.compile(template), this.props);
   }

@@ -19,8 +19,9 @@ interface FormProps {
 const events = {
   submit: (event: SubmitEvent) => {
     const { data, isValid } = collect(event);
+    /* eslint-disable */
     const { password_again, ...rest } = data;
-    const { login, password } = rest;
+    const { login, password } = data;
 
     if (isValid) {
       (event.target as HTMLElement)?.id === 'account'
@@ -41,9 +42,9 @@ export class AuthForm extends Block<FormProps> {
 
     AuthController.getUser().then((user) => {
       if (user) {
-        router.go(routes.chats)
+        router.go(routes.chats);
       }
-    })
+    });
   }
 
   protected init(): void {

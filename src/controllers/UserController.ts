@@ -24,8 +24,8 @@ export class UserController {
 
       return user;
     } catch (err) {
-      console.error(err)
-      return 
+      console.error(err);
+      return;
     }
   }
 
@@ -33,16 +33,16 @@ export class UserController {
     try {
       await this.api.changeProfile(data);
     } catch (err) {
-      console.error('Failed to save data', err)
+      console.error('Failed to save data', err);
     }
   }
 
   async saveAvatar() {
     try {
       await this.api.changeAvatar();
-    } catch(err) {
+    } catch (err) {
       if (err === null) {
-        router.go(routes.serverError)
+        router.go(routes.serverError);
       }
     }
   }
@@ -51,7 +51,7 @@ export class UserController {
     try {
       await this.api.changePassword(data);
     } catch (err) {
-      console.error('Failed to save password', err)
+      console.error('Failed to save password', err);
     }
   }
 
@@ -59,9 +59,9 @@ export class UserController {
     try {
       return this.api.getUserByLogin(login);
     } catch (err) {
-      console.error('Unable to search for user', err)
+      console.error('Unable to search for user', err);
 
-      return []
+      return [];
     }
   }
 }

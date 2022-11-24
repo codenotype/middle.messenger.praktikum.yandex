@@ -12,7 +12,7 @@ export class ChatsController {
     this.api = chatsApi;
   }
 
-  async getChats(updateStore: boolean = true) {
+  async getChats(updateStore = true) {
     try {
       const chats = await this.api.read();
 
@@ -22,9 +22,9 @@ export class ChatsController {
 
       return chats;
     } catch (err) {
-      console.log(err)
+      console.log(err);
 
-      return []
+      return [];
     }
   }
 
@@ -33,7 +33,7 @@ export class ChatsController {
       await this.api.create(title);
       await this.getChats();
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
 
@@ -42,7 +42,7 @@ export class ChatsController {
       await this.api.deleteChat(id);
       await this.getChats();
     } catch (err) {
-        console.log(err)
+      console.log(err);
     }
   }
 
@@ -50,7 +50,7 @@ export class ChatsController {
     try {
       return this.api.getChatUsers(id);
     } catch (err) {
-      return []
+      return [];
     }
   }
 
@@ -68,7 +68,7 @@ export class ChatsController {
 
       MessagesController.connect(id, token);
     } catch {
-      router.go(routes.notFound)
+      router.go(routes.notFound);
     }
   }
 
@@ -82,7 +82,7 @@ export class ChatsController {
 
       await this.api.addUser(users, state.selectedChat);
     } catch (err) {
-      console.error('Unable to add user', err)
+      console.error('Unable to add user', err);
     }
   }
 
@@ -92,7 +92,7 @@ export class ChatsController {
 
       await this.api.deleteUser(users, state.selectedChat);
     } catch (err) {
-      console.error('Unable to delete user', err)
+      console.error('Unable to delete user', err);
     }
   }
 
@@ -102,9 +102,9 @@ export class ChatsController {
 
       return token;
     } catch (err) {
-      console.error('No token was given')
+      console.error('No token was given');
 
-      return ''
+      return '';
     }
   }
 }

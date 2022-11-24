@@ -23,16 +23,14 @@ export class MessagesController {
 
   async connect(chatId: number, token: string) {
     const { user } = store.getState();
-    const ws = new WS(
-      `wss://ya-praktikum.tech/ws/chats/${user.id}/${chatId}/${token}`
-    );
+    const ws = new WS(`${process.env.WS}/${user.id}/${chatId}/${token}`);
 
     this._sockets[chatId] = ws;
 
     try {
       await ws.open();
     } catch {
-      throw new Error('Failed to open websocket')
+      throw new Error('Failed to open websocket');
     }
 
     ws.on(wsEvents.message, (msg) => {

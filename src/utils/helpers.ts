@@ -45,7 +45,8 @@ export const renderBlock = (query: string, block: Block) => {
 };
 
 export const merge = (lhs: Indexed, rhs: Indexed): Indexed => {
-  for (let p in rhs) {
+  for (const p in rhs) {
+    /* eslint-disable */
     if (!rhs.hasOwnProperty(p)) {
       continue;
     }

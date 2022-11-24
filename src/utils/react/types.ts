@@ -6,6 +6,7 @@ export type Events = {
   [key in string]: (...args: any[]) => void;
 };
 
+/* eslint-disable */
 export interface BlockWrap<P extends {} = any> {
   new (props: P): Block<P>;
 }

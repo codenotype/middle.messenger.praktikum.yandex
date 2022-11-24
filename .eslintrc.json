@@ -26,7 +26,8 @@
         "@typescript-eslint/no-var-requires": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
         "indent": ["error", 2],
-        "linebreak-style": ["off", "unix"],
+        "linebreak-style": ["off", "windows"],
+        "eol-last": ["error", "always"],
         "quotes": ["error", "single"],
         "semi": ["error", "always"]
     }

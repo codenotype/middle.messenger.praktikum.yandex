@@ -40,6 +40,7 @@ export class InputProfile extends Block {
     });
   }
 
+  /* eslint-disable */
   protected componentDidUpdate(_o: any, _n: any): boolean {
     return true;
   }

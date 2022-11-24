@@ -2,6 +2,7 @@ import { EventBus } from './EventBus';
 import { nanoid } from 'nanoid';
 import { Events } from './types';
 
+/* eslint-disable */
 abstract class Block<Props extends {} = any> {
   static events = {
     init: 'init',

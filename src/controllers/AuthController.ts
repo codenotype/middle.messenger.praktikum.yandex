@@ -37,9 +37,9 @@ export class AuthController {
 
       store.set('user', user);
 
-      return user
+      return user;
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   }
 
