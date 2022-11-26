@@ -61,9 +61,9 @@ $inpt-bg-clr: #1b2c3c;
     align-items: center;
     width: 100%;
     /* stylelint-disable */
-    input {
+    & input {
       padding-left: 4.5rem;
-      width: 54.3rem;
+      max-width: 54rem;
     }
     /* stylelint-enable */
     img {

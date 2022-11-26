@@ -1,23 +1,50 @@
-import { loginForm, createAccountForm } from './login.tmpl';
-import { renderPage } from '../../utils/render';
 import Block from '../../utils/react/Block';
 import Hbs from 'handlebars';
+import { loginForm, createAccountForm } from './login.tmpl';
 import { account, login } from './data';
 import { Events } from '../../utils/react/types';
 import { collect } from '../../utils/collect';
 import { validateInput } from '../../utils/validate';
+import AuthController from '../../controllers/AuthController';
+import { SigninData, SignupData } from '../../api/AuthApi';
+import router from '../../utils/router/Router';
+import { routes } from '../../utils/router/types';
 
 interface FormProps {
   classes?: string;
   formTitle: string;
-  link: string;
-  href: string;
   events?: Events;
 }
 
-export class AuthForm extends Block {
+const events = {
+  submit: (event: SubmitEvent) => {
+    const { data, isValid } = collect(event);
+    /* eslint-disable */
+    const { password_again, ...rest } = data;
+    const { login, password } = data;
+
+    if (isValid) {
+      (event.target as HTMLElement)?.id === 'account'
+        ? AuthController.signup(rest as unknown as SignupData)
+        : AuthController.signin({ login, password } as unknown as SigninData);
+    } else {
+      alert('Fields are filled incorrectly');
+    }
+  },
+  focusin: validateInput,
+  focusout: validateInput,
+  input: validateInput,
+};
+
+export class AuthForm extends Block<FormProps> {
   constructor(props: FormProps) {
-    super(props);
+    super({ ...props, events, formTitle: 'Enter' });
+
+    AuthController.getUser().then((user) => {
+      if (user) {
+        router.go(routes.chats);
+      }
+    });
   }
 
   protected init(): void {
@@ -29,9 +56,15 @@ export class AuthForm extends Block {
   }
 }
 
-export class AccountForm extends Block {
+export class AccountForm extends Block<FormProps> {
   constructor(props: FormProps) {
-    super(props);
+    super({
+      ...props,
+      events: {
+        ...events,
+      },
+      formTitle: 'Registration',
+    });
   }
 
   protected init(): void {
@@ -39,37 +72,6 @@ export class AccountForm extends Block {
   }
 
   protected render(): DocumentFragment {
-    return this.swap(
-      Hbs.compile(createAccountForm),
-      this.props
-    );
+    return this.swap(Hbs.compile(createAccountForm), this.props);
   }
 }
-
-window.addEventListener('DOMContentLoaded', () => {
-  const events = {
-    submit: collect,
-    focusin: validateInput,
-    focusout: validateInput,
-    input: validateInput,
-  };
-
-  renderPage(
-    '#btn-login',
-    new AuthForm({
-      formTitle: 'Enter',
-      link: 'Create account',
-      href: '#',
-      events,
-    })
-  );
-  renderPage(
-    '#btn-account',
-    new AccountForm({
-      formTitle: 'Registration',
-      link: 'Sign in',
-      href: '#',
-      events,
-    })
-  );
-});

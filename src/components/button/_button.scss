@@ -6,7 +6,7 @@ $button-std-w: 25rem;
 $button-std-h: 5rem;
 
 .button {
-  background: rgba(0, 0, 0, 0%);
+  background: $black-clr;
   border: $button-border $button-main-color;
   border-radius: 2.5rem;
   color: $button-main-color;

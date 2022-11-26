@@ -4,7 +4,8 @@ export const loginForm = `
     {{{ LoginInput }}}
     {{{ PasswordInput }}}
     {{{ ButtonLogin }}}
-    <a href={{ href }}>{{ link }}</a>
+    
+    {{{ Link }}}
   </form>
 `;
 
@@ -22,7 +23,7 @@ export const createAccountForm = `
     {{{ InputPasswordAgain }}}
     {{{ ButtonAccount  }}}
 
-    <a href={{ href }}>{{ link }}</a>
+    {{{ Link }}}
 
   </form>
 `;

@@ -1,10 +1,12 @@
 import Handlebars from 'handlebars';
 import { avatar } from './avatar.tmpl';
 import Block from '../../utils/react/Block';
+import { Events } from '../../utils/react/types';
 
 interface AvatarProps {
-  id?: string
-  source: any
+  id?: string;
+  source: any;
+  events?: Events;
 }
 
 export class Avatar extends Block {

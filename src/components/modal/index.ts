@@ -1,16 +1,19 @@
 import { modalLoad, modalUser } from './modal.tmpl';
-import { renderPage } from '../../utils/render';
 import Block from '../../utils/react/Block';
 import { Button } from '../button';
 import Handlebars from 'handlebars';
 import { Input } from '../input';
+import router from '../../utils/router/Router';
+import { routes } from '../../utils/router/types';
+import { collect } from '../../utils/collect';
+import { Events } from '../../utils/react/types';
 
 interface ModalProps {
   title: string;
 }
 
 interface ModalLoadProps extends ModalProps {
-  label: string;
+  events: Events;
 }
 
 export class ModalLoad extends Block {
@@ -19,12 +22,62 @@ export class ModalLoad extends Block {
   }
 
   protected init(): void {
-    this.children.ButtonLoad = new Button({
-      label: 'Change',
-      events: {
-        click: () => console.log('loaded'),
-      },
-    });
+    this.children = {
+      InputFile: new Input({
+        type: 'file',
+        id: 'file-input',
+        val: '',
+        label: '',
+        events: {
+          change: (event: any) => {
+            const title = document.querySelector('.modal h1');
+            const input = event.target;
+
+            let file = null;
+
+            if (input?.files) {
+              file = input.files[0];
+            }
+
+            if (title) {
+              if (file) {
+                title.textContent = 'File loaded';
+              } else {
+                title.textContent = 'File load error';
+              }
+            }
+          },
+        },
+      }),
+
+      ButtonLoad: new Button({
+        label: 'Change',
+        type: 'submit',
+        events: {},
+      }),
+
+      ButtonClose: new Button({
+        label: 'Close',
+        type: 'button',
+        events: {
+          click: () => {
+            const modal = document.querySelector('.modal');
+            const input = modal?.querySelector('input');
+            const title = modal?.querySelector('h1');
+
+            if (input) {
+              input.value = '';
+            }
+
+            if (title) {
+              title.textContent = 'Load file';
+            }
+
+            modal?.classList.add('modal_hidden');
+          },
+        },
+      }),
+    };
   }
 
   protected render(): DocumentFragment {
@@ -34,7 +87,15 @@ export class ModalLoad extends Block {
 
 export class ModalUser extends Block {
   constructor(props: ModalProps) {
-    super(props);
+    super({
+      ...props,
+      events: {
+        submit: (data: SubmitEvent) => {
+          collect(data);
+          router.go(routes.chats);
+        },
+      },
+    });
   }
 
   protected init(): void {
@@ -42,9 +103,7 @@ export class ModalUser extends Block {
 
     this.children.ButtonAction = new Button({
       label: isAdding ? 'Add' : 'Delete',
-      events: {
-        click: () => console.log('action'),
-      },
+      events: {},
     });
     this.children.InputLogin = new Input({
       type: 'text',
@@ -58,39 +117,3 @@ export class ModalUser extends Block {
     return this.swap(Handlebars.compile(modalUser), this.props);
   }
 }
-
-window.addEventListener('DOMContentLoaded', () => {
-  renderPage(
-    '#btn-load',
-    new ModalLoad({
-      title: 'Load file',
-      label: 'Choose file on your computer',
-    })
-  );
-  renderPage(
-    '#btn-loaded',
-    new ModalLoad({
-      title: 'File loaded',
-      label: 'filename.png',
-    })
-  );
-  renderPage(
-    '#btn-load-error',
-    new ModalLoad({
-      title: 'Error (try again)',
-      label: 'Choose file on your computer',
-    })
-  );
-  renderPage(
-    '#btn-user-creation',
-    new ModalUser({
-      title: 'Add user',
-    })
-  );
-  renderPage(
-    '#btn-user-removal',
-    new ModalUser({
-      title: 'Delete user',
-    })
-  );
-});

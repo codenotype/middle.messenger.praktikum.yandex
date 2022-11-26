@@ -4,7 +4,7 @@
   padding: 1rem;
   margin-right: 1rem;
   display: grid;
-  min-width: 50rem;
+  min-width: 30rem;
   min-height: 12rem;
 
   grid-template: {
@@ -13,9 +13,9 @@
     areas: 'picture title' 'picture message';
   }
 
-  &:hover { background: rgba(0, 0, 0, 20%); }
+  &:hover { background: $weak-black; }
 
-  border-top: 2px solid rgba(250, 250, 250, 10%);
+  border-top: 2px solid $weak-white;
 
   &__image {
     grid-area: picture;
@@ -47,7 +47,7 @@
     font-size: 1.6rem;
     font-weight: 600;
     letter-spacing: 0.1rem;
-    color: white;
+    color: $msg-brdr;
     opacity: 0.9;
   }
 
@@ -56,18 +56,38 @@
     right: 1rem;
     top: 1rem;
     font-size: 1.2rem;
-    color: silver;
+    color: $weaker-white;
+  }
+
+  &__delete {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: $black-clr;
+    border: 0.2rem solid $pink-bright-clr;
+    border-radius: 50%;
+    color: $msg-brdr;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & p {
+      font-size: 1rem;
+      font-weight: 600;
+    }
   }
 
   &__notification {
     position: absolute;
-    right: 1rem;
-    bottom: 0;
+    right: 4rem;
+    bottom: 1rem;
     width: 2.5rem;
     height: 2.5rem;
     border: 2px solid $green-clr;
     border-radius: 50%;
-    color: white;
+    color: $msg-brdr;
     display: flex;
 
     p {

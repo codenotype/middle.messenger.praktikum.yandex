@@ -1,5 +1,5 @@
 .message {
-  background: #000;
+  background: $black-clr;
 
   &-chat {
     position: relative;
@@ -13,13 +13,13 @@
       align-items: center;
       margin-bottom: 0.5rem;
 
-      p { color: wheat; }
+      p { color: $nick-clr; }
 
       img {
         width: 32;
         height: 32;
         border-radius: 50%;
-        border: 0.2rem solid silver;
+        border: 0.2rem solid $avatar-clr;
       }
     }
 
@@ -31,13 +31,13 @@
     }
 
     &__content {
-      background: rgba($color: #16384a, $alpha: 100%);
-      border: 1px solid white;
+      background: $msg-bgr;
+      border: 1px solid $msg-brdr;
       border-radius: 1rem;
       padding: 1rem;
 
       &_own {
-        background: rgba($color: #255a77, $alpha: 100%);
+        background: $own-msg-bgr;
         align-self: center;
       }
     }

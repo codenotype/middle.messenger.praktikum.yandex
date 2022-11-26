@@ -1,7 +1,12 @@
-export type Props<T = any> = {
-  [key in string]: T;
-};
+import Block from './Block';
+
+export type Props<T = any> = Record<string, T>;
 
 export type Events = {
   [key in string]: (...args: any[]) => void;
 };
+
+/* eslint-disable */
+export interface BlockWrap<P extends {} = any> {
+  new (props: P): Block<P>;
+}
