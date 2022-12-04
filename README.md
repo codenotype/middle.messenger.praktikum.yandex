@@ -10,10 +10,15 @@ NodeJS version is equal or more than 12
 
 # Build and Run
 1. Open cmd
-2. Enter npm run start
+2. Enter "npm run start"
 3. Press Enter
 4. Wait for message "ChYat app is running on port 3000!"
 5. Open http://localhost:3000 in a browser
+
+# Tests
+1. Open cmd
+2. Enter "npm run test"
+3. Wait until all tests will be completed
 
 # Link to design prototype
 https://www.figma.com/file/Z6wGXmTK2PGYsHgAw1nmub/chYat?node-id=0%3A1
@@ -36,3 +41,5 @@ https://dainty-alpaca-c3e3a0.netlify.app/
 - Router
 - Store
 - Websockets
+- Dockerfile
+- Precommit

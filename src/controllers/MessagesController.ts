@@ -23,7 +23,10 @@ export class MessagesController {
 
   async connect(chatId: number, token: string) {
     const { user } = store.getState();
-    const ws = new WS(`${process.env.WS}/${user.id}/${chatId}/${token}`);
+    const backup = 'wss://ya-praktikum.tech/ws/chats';
+    const ws = new WS(
+      `${process.env.WS || backup}/${user.id}/${chatId}/${token}`
+    );
 
     this._sockets[chatId] = ws;
 

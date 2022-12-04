@@ -6,6 +6,7 @@ import { AuthForm, AccountForm } from './pages/login';
 import { ProfilePage, ProfilePagePasswordChange } from './pages/profile';
 import router from './utils/router/Router';
 import { routes } from './utils/router/types';
+import './index.scss';
 
 window.addEventListener('DOMContentLoaded', () => {
   router
