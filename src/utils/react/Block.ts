@@ -1,5 +1,4 @@
 import { EventBus } from './EventBus';
-import { nanoid } from 'nanoid';
 import { Events } from './types';
 
 /* eslint-disable */
@@ -11,7 +10,8 @@ abstract class Block<Props extends {} = any> {
     render: 'render',
   };
 
-  public id = nanoid(5);
+  // uuid and nanoid need esm so use math.random is enough
+  public id = `stub-${Math.random().toString().slice(2)}`
   public children: Record<string, Block | Block[]>;
 
   protected props: Props;
@@ -112,7 +112,6 @@ abstract class Block<Props extends {} = any> {
     const html = template(contextAndStubs);
 
     const temp = document.createElement('template');
-
     temp.innerHTML = html;
 
     const replaceStub = (component: Block) => {
